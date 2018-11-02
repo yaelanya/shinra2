@@ -71,7 +71,7 @@ def output(article):
     filepath = "../data/pubchem_articles.jsonl"
     with open(filepath, 'a') as f:
         json.dump(article, f)
-        f.write('\n', f)
+        f.write('\n')
 
 
 def get_new_CID(cids, internal_links):
@@ -88,7 +88,7 @@ def init_CID():
             cid = pil.get_CID(article)
             cid_list.append(cid)
             link_list.append(pil.get_link_CID(line, cid))
-            
+
             line = f.readline()
 
     return cid_list, get_new_CID(cid_list, pil.flatten(link_list))
