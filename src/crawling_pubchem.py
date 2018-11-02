@@ -60,7 +60,7 @@ def crawling(cids):
         article = resp.json()
         output(article)
 
-        internal_link_cids.append(pil.get_link_CID(article.text))
+        internal_link_cids.append(pil.get_link_CID(resp.text))
 
     internal_link_cids = pil.flatten(internal_link_cids)
     
