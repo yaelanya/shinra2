@@ -5,6 +5,7 @@ import pandas as pd
 import requests
 import json
 import time
+from tqdm import tqdm
 
 import pubchem_util as pil
 
@@ -31,7 +32,7 @@ def main():
 
 def crawling(cids):
     internal_link_cids = []
-    for cid in cids:
+    for cid in tqdm(cids):
         count = 0
         while True:
             if count > 5: break
