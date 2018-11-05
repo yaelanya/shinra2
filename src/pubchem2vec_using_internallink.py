@@ -49,14 +49,15 @@ def main(**argv):
 def train(model, data, epochs=1, negative_samples=1.0):
     all_links = np.array(list(tokenizer.link_index.values()))
 
-    for i in range(epochs):
+    for i in enumerate(range(epochs), 1):
         loss = 0.0
         for entry, link in tqdm(data.groupby('linked')):
             backlinks = link.entry.values
             entry, link, label = neg(entry, backlinks, all_links, negative_samples)
             loss += model.train_on_batch([entry, link], label)
+            break
 
-        print(f"Epoch {i + 1}/{epochs}\tloss: {loss}")
+        print("Epoch {i}/{epochs}\tloss: {loss}".format(**locals()))
 
 def build():
     input_target_entry = Input(shape=(1,), dtype='int32', name='input1')
@@ -85,10 +86,13 @@ def neg(entry, backlink, all_links, negative_samples=1.0):
 
 def save(model, output_path):
     with open(output_path ,'w') as f:
-        f.write(f"{LINK_SIZE - 1} {EMBED_DIM}\n")
+        size = LINK_SIZE - 1
+        embedding_dim = EMBED_DIM
+        f.write("{size} {embedding_dim}\n".format(**locals()))
         vectors = model.get_weights()[0]
         for cid, i in tokenizer.link_index.items():
-            f.write(f"{cid} {' '.join(map(str, list(vectors[i, :])))}\n")
+            vector = ' '.join(map(str, list(vectors[i, :])))
+            f.write("{cid} {vector}\n".format(**locals()))
 
 if __name__ == '__main__':
     argv = sys.argv
