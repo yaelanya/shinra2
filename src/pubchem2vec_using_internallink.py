@@ -49,14 +49,16 @@ def main(**argv):
 def train(model, data, epochs=1, negative_samples=1.0):
     all_links = np.array(list(tokenizer.link_index.values()))
 
-    for i in enumerate(range(epochs), 1):
+    for i, _  in enumerate(range(epochs), 1):
         loss = 0.0
+        size = len(data.groupby('linked'))
         for entry, link in tqdm(data.groupby('linked')):
             backlinks = link.entry.values
             entry, link, label = neg(entry, backlinks, all_links, negative_samples)
             loss += model.train_on_batch([entry, link], label)
-            break
 
+        loss /= size
+        
         print("Epoch {i}/{epochs}\tloss: {loss}".format(**locals()))
 
 def build():
