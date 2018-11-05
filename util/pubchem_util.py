@@ -7,7 +7,7 @@ def get_link_CID(line: str, current=None) -> list:
     m = re.findall(r, line)
     if m:
         if current:
-            return list(set(m) - set(current))
+            return list(set(m) - set([current]))
         else:
             return m
             

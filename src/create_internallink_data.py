@@ -25,4 +25,4 @@ with open("../data/pubchem_articles.jsonl", 'r') as f:
 
 internal_link_df = internal_link_df[(internal_link_df.entry.str.len() > 0) & (internal_link_df.linked.str.len() > 0)]
 
-internal_link_df.to_csv("../data/internal_CID_link_in_entries.csv", index=False)
+#internal_link_df.to_csv("../data/internal_CID_link_in_entries.csv", index=False)
