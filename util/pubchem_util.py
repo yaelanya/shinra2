@@ -15,4 +15,7 @@ def get_link_CID(line: str, current=None) -> list:
         return []
 
 def get_CID(article: dict) -> str:
-    return str(article.get('Record').get('RecordNumber'))
+    if article.get('Record').get('RecordNumber'):
+        return str(article.get('Record').get('RecordNumber'))
+    else:
+        return None

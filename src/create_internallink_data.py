@@ -11,10 +11,10 @@ with open("../data/pubchem_articles.jsonl", 'r') as f:
     line = f.readline()
     while line:
         article = json.loads(line.strip())
-        if article is None:
+        if pil.get_CID(article) is None:
             line = f.readline()
             continue
-        cid = str(pil.get_CID(article))
+        cid = article.get('Record').get('RecordNumber')
 
         internal_link_df = internal_link_df.append(
             pd.DataFrame({'entry':cid, 'linked': pil.get_link_CID(line, current=cid)})
