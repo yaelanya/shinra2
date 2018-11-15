@@ -1,4 +1,6 @@
-*/
-!notebook/
-!src/
-!util/
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*/__pycache__/*
+data/
+dump/
+model/
