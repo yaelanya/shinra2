@@ -9,7 +9,6 @@ torch.manual_seed(1)
 START_TAG = "<START>"
 STOP_TAG = "<STOP>"
 
-tag_to_ix = {"B": 0, "I": 1, "E": 2, "O": 3}
 
 def argmax(vec):
     # return the argmax as a python int
